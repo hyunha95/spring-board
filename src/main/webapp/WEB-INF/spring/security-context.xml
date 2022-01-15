@@ -18,6 +18,7 @@
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/member/login.do" access="permitAll"/>
+		<intercept-url pattern="/member/enroll.do" access="permitAll"/>
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
 	
 	
@@ -28,11 +29,12 @@
 		login-processing-url="/member/login.do"
 		username-parameter="id"
 		password-parameter="password"
-		default-target-url="/"/>
+		default-target-url="/"
+		always-use-default-target="false"/>
 		
 		
-		
-		
+		<!-- 모든 POST요청에 csrf 토큰 값을 검증한다. -->
+		<csrf disabled="false"></csrf>
 	</http>
 
 	

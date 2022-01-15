@@ -10,6 +10,30 @@
 		</layout>
 	</appender>
 	
+	<appender class="org.apache.log4j.DailyRollingFileAppender" name="fileLogger">
+		<param name="file" value="${catalina.base}/logs/spring/spring.log"/>
+		<param name="append" value="true"/>
+		<param name="datePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5:[%d{yyyy/MM/dd HH:mm:ss}] %F:%L = %m%n"/>
+		</layout>
+	</appender>
+	
+	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %m%n"/>
+		</layout>
+	</appender>
+	
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	
 	<!-- Application Loggers -->
 	<logger name="com.spring.board">
 		<level value="info" />
@@ -36,6 +60,7 @@
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
+		<appender-ref ref="fileLogger"/>
 	</root>
 	
 </log4j:configuration>
