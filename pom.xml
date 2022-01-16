@@ -49,6 +49,15 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<!-- aop처리용 aspectjweaver 의존 추가 -->
+		<!-- 트랜잭션처리용 의존 -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.9.6</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -89,8 +98,9 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
 		</dependency>
+		<!-- scope태그의 기본값은 complie, runtime, provided -->
 
 		<!-- @Inject -->
 		<dependency>

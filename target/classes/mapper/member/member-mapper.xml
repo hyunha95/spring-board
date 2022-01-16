@@ -17,6 +17,15 @@
 			#{address}
 		)
 	</insert>
+	
+	<insert id="insertAuthority">
+		insert into 
+			authority
+		values(
+			#{id},
+			'ROLE_USER'
+		)
+	</insert>
 </mapper>
 
 

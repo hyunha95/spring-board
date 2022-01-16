@@ -21,6 +21,8 @@ import com.spring.board.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+
 @Controller
 @RequestMapping("/member")
 @Slf4j

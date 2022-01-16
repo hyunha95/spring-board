@@ -6,4 +6,6 @@ public interface MemberDao {
 
 	int insertMember(Member member);
 
+	int insertAuthority(Member member);
+
 }

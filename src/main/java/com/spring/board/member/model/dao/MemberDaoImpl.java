@@ -17,4 +17,10 @@ public class MemberDaoImpl implements MemberDao {
 		return session.insert("member.insertMember", member);
 	}
 
+	@Override
+	public int insertAuthority(Member member) {
+		return session.insert("member.insertAuthority", member);
+	}
+
+	
 }
