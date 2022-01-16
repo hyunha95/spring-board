@@ -22,7 +22,8 @@
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/member/memberLogin.do" access="permitAll"/>
 		<intercept-url pattern="/member/enroll.do" access="permitAll"/>
-		<intercept-url pattern="/**" access="isAuthenticated()"/>
+		
+		<!-- <intercept-url pattern="/**" access="isAuthenticated()"/> -->
 
 	<form-login
 		login-page="/member/memberLogin.do"
