@@ -3,8 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%-- spring-webmvc의존 : security의 csrf토큰 생성 --%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<html lang="en"\>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -19,13 +22,34 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
+<c:if test="${msg} != null">
+<script>
+alert("${msg}");
+</script>
+</c:if>
+   
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/member/login">Sign Up</a>
+                <!-- 로그인 하지 않았을 때 -->
+                <sec:authorize access="isAnonymous()">
+	                <span>
+		                <a class="btn btn-primary" href="${pageContext.request.contextPath}/member/login.do">로그인</a>
+		                <a class="btn btn-primary" href="${pageContext.request.contextPath}/member/enroll.do">회원가입</a>
+	                </span>	                
+                </sec:authorize>
+                <!-- 로그인 했을 때 -->
+                <sec:authorize access="isAuthenticated()">
+                	<span>
+                		<a href="#">
+                			<sec:authentication property="principal.username"/>
+                		</a>님
+                		
+                	</span>
+                </sec:authorize>
             </div>
         </nav>
         <!-- Masthead-->
