@@ -23,10 +23,7 @@
 		<intercept-url pattern="/member/memberLogin.do" access="permitAll"/>
 		<intercept-url pattern="/member/enroll.do" access="permitAll"/>
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
-	
-	
-	
-	
+
 	<form-login
 		login-page="/member/memberLogin.do"
 		login-processing-url="/member/memberLogin.do"
@@ -36,6 +33,10 @@
 		always-use-default-target="false"
 		authentication-success-handler-ref="customSuccessHandler"/>
 		
+	<logout
+		logout-url="/member/memberLogout.do"
+		logout-success-url="/"
+		invalidate-session="true"/>
 		
 		<!-- 모든 POST요청에 csrf 토큰 값을 검증한다. -->
 		<csrf disabled="false"/>
@@ -47,10 +48,7 @@
 	<authentication-manager>
 		<authentication-provider user-service-ref="securityService">
 			<password-encoder ref="bcryptPasswordEncoder"/>
-		</authentication-provider>
-	</authentication-manager>
-	
-	<!-- 
+				<!-- 
 			<user-service>
 				<user 
 				name="hyunha" 
@@ -62,5 +60,9 @@
 				authorities="ROLE_ADMIN"/>
 			</user-service>
  -->
+		</authentication-provider>
+	</authentication-manager>
+	
+
 	<context:component-scan base-package="com.spring.security"/>
 </beans:beans>

@@ -47,7 +47,13 @@
                 		<a href="#">
                 			<sec:authentication property="principal.username"/>
                 		</a>님
-                	</span>
+	               		<%-- 로그아웃도 csrf 폼 검사를 하기 때문에 무조건 post로 보내야 한다. --%>
+	               		<form:form
+	               			action="${pageContext.request.contextPath}/member/memberLogout.do"
+	               			method="post">
+	                		<button type="submit" class="btn btn-primary">로그아웃</button>
+	               		</form:form>  
+               		</span>              	
                 </sec:authorize>
             </div>
         </nav>

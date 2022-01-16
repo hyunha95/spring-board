@@ -33,7 +33,7 @@ public class MemberController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@GetMapping("/memberLogin.do")
-	public void memberLogin() {System.out.println("이게 왜 찍히는거냐 ;;;;;;");}
+	public void memberLogin() {}
 	
 	@PostMapping("/enroll.do")
 	public String enroll(@ModelAttribute MemberEntity member, RedirectAttributes redirectAttr) {
