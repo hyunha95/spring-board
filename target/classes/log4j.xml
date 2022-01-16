@@ -36,7 +36,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.spring.board">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

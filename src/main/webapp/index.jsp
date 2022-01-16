@@ -7,7 +7,7 @@
 <%-- spring-webmvc의존 : security의 csrf토큰 생성 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -22,10 +22,10 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
-<c:if test="${msg} != null">
-<script>
-alert("${msg}");
-</script>
+<c:if test="${not empty msg}">
+	<script>
+		alert("${msg}");
+	</script>
 </c:if>
    
     </head>
@@ -37,7 +37,7 @@ alert("${msg}");
                 <!-- 로그인 하지 않았을 때 -->
                 <sec:authorize access="isAnonymous()">
 	                <span>
-		                <a class="btn btn-primary" href="${pageContext.request.contextPath}/member/login.do">로그인</a>
+		                <a class="btn btn-primary" href="${pageContext.request.contextPath}/member/memberLogin.do">로그인</a>
 		                <a class="btn btn-primary" href="${pageContext.request.contextPath}/member/enroll.do">회원가입</a>
 	                </span>	                
                 </sec:authorize>
@@ -47,7 +47,6 @@ alert("${msg}");
                 		<a href="#">
                 			<sec:authentication property="principal.username"/>
                 		</a>님
-                		
                 	</span>
                 </sec:authorize>
             </div>
@@ -76,7 +75,7 @@ alert("${msg}");
                                         <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
                                         <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
                                     </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">Submit</button></div>
                                 </div>
                                 <!-- Submit success message-->
                                 <!---->
@@ -205,7 +204,7 @@ alert("${msg}");
                                     <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Email Address is required.</div>
                                     <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Email Address Email is not valid.</div>
                                 </div>
-                                <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                                <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">Submit</button></div>
                             </div>
                             <!-- Submit success message-->
                             <!---->
@@ -263,7 +262,7 @@ alert("${msg}");
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

@@ -1,11 +1,11 @@
 package com.spring.board.member.model.dao;
 
-import com.spring.board.member.model.vo.Member;
+import com.spring.board.member.model.vo.MemberEntity;
 
 public interface MemberDao {
 
-	int insertMember(Member member);
+	int insertMember(MemberEntity member);
 
-	int insertAuthority(Member member);
+	int insertAuthority(MemberEntity member);
 
 }

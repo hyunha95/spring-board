@@ -53,6 +53,10 @@ create table authority (
     constraint pk_authority primary key(member_id, authority),
     constraint fk_authority_member_id foreign key(member_id) references member(id) on delete cascade
 );
+select * from member;
+select * from authority;
+delete from member where id='shua';
+commit;
 
 --authority테이블에 오래키 제약조건 on delete cascade 추가
 ---------------------------------------

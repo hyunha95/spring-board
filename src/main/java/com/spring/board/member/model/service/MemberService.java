@@ -1,10 +1,10 @@
 package com.spring.board.member.model.service;
 
-import com.spring.board.member.model.vo.Member;
+import com.spring.board.member.model.vo.MemberEntity;
 
 public interface MemberService {
 
-	int insertMember(Member member);
+	int insertMember(MemberEntity member);
 
 	
 }

@@ -20,7 +20,7 @@ $(() => {
 	$(loginModal)
 		.modal('show')
 		.on("hide.bs.modal", (e) => {
-			location.href = '${pageContext.request.contextPath}';
+			location.href = '${empty header.referer || header.referer.contains('/member/memberLogin.do') ? pageContext.request.contextPath : header.referer}';
 		});
 });
 </script>
@@ -37,8 +37,8 @@ $(() => {
 	      </div>
 	      <form:form 
 	      	id="loginFrm"
-	      	action="${pageContext.request.contextPath}/member/login.do"
-	      	method="post"
+	      	action="${pageContext.request.contextPath}/member/memberLogin.do"
+	      	method="POST"
 	      	class="m-5">
 	        <!-- 아이디 -->
 	        <div class="mb-3">

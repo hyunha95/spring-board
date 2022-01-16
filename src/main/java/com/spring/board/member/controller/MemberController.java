@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.member.model.service.MemberService;
-import com.spring.board.member.model.vo.Member;
+import com.spring.board.member.model.vo.MemberEntity;
 
 import lombok.extern.slf4j.Slf4j;
-
-
 
 @Controller
 @RequestMapping("/member")
@@ -34,11 +32,11 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@GetMapping("/login.do")
-	public void login() {}
+	@GetMapping("/memberLogin.do")
+	public void memberLogin() {System.out.println("이게 왜 찍히는거냐 ;;;;;;");}
 	
 	@PostMapping("/enroll.do")
-	public String enroll(@ModelAttribute Member member, RedirectAttributes ra) {
+	public String enroll(@ModelAttribute MemberEntity member, RedirectAttributes redirectAttr) {
 		log.debug("member = {}", member);
 
 		// 비밀번호 암호화 처리
@@ -48,12 +46,12 @@ public class MemberController {
 		member.setPassword(encodedPassword);
 		
 		int result = memberService.insertMember(member);
-		ra.addFlashAttribute("msg", result > 0 ? "회원가입 성공" : "회원가입 실패");
+		redirectAttr.addFlashAttribute("msg", result > 0 ? "회원 가입 성공!" : "회원 가입 실패!");
 		return "redirect:/";
 	}
 	
 	@GetMapping("/enroll.do")
-	public void enroll() {}
+	public void enroll() {System.out.println("------------------------");}
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

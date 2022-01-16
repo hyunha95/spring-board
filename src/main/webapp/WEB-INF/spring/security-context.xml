@@ -10,6 +10,9 @@
 	<beans:bean
 		id="bcryptPasswordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<beans:bean
+		id="customSuccessHandler"
+		class="com.spring.board.member.controller.CustomSuccessHandler"/>
 
 
 	<http pattern="/resources/**" security="none"/>	
@@ -17,7 +20,7 @@
 	<http auto-config="true">
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
-		<intercept-url pattern="/member/login.do" access="permitAll"/>
+		<intercept-url pattern="/member/memberLogin.do" access="permitAll"/>
 		<intercept-url pattern="/member/enroll.do" access="permitAll"/>
 		<intercept-url pattern="/**" access="isAuthenticated()"/>
 	
@@ -25,24 +28,29 @@
 	
 	
 	<form-login
-		login-page="/member/login.do"
-		login-processing-url="/member/login.do"
+		login-page="/member/memberLogin.do"
+		login-processing-url="/member/memberLogin.do"
 		username-parameter="id"
 		password-parameter="password"
 		default-target-url="/"
-		always-use-default-target="false"/>
+		always-use-default-target="false"
+		authentication-success-handler-ref="customSuccessHandler"/>
 		
 		
 		<!-- 모든 POST요청에 csrf 토큰 값을 검증한다. -->
-		<csrf disabled="false"></csrf>
+		<csrf disabled="false"/>
 	</http>
 
 	
 
 
 	<authentication-manager>
-		<authentication-provider>
+		<authentication-provider user-service-ref="securityService">
 			<password-encoder ref="bcryptPasswordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- 
 			<user-service>
 				<user 
 				name="hyunha" 
@@ -53,8 +61,6 @@
 				password="1234" 
 				authorities="ROLE_ADMIN"/>
 			</user-service>
-		</authentication-provider>
-	</authentication-manager>
-	
-	<context:component-scan base-package="com.spring.board"/>
+ -->
+	<context:component-scan base-package="com.spring.security"/>
 </beans:beans>
