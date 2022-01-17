@@ -72,8 +72,6 @@ alter table authority DROP constraint fk_authority_member_id;
 alter table authority add constraint fk_authority_member_id foreign key(member_id) references member(id) on delete cascade;
 ---------------------------------------
 
-
-
 -- 모든 사용자에게 공통권한 ROLE_USER 부여
 select * from authority;
 insert into authority values('admin', 'ROLE_USER');
@@ -83,11 +81,31 @@ insert into authority values('shua', 'ROLE_USER');
 
 -- 회원가입 시 member/authority에 각각 insert해야한다. (transaction처리필수)
 
+-- 회원정보 조회(권한포함)
+-- 권한 1개면 1행, 권한 2개 2행되는 join query
+select
+    *
+from
+    member m join authority a
+        on m.id = a.member_id
+where
+    id = 'admin';
 
+--==========================================
+-- board테이블 생성
+--==========================================
+create table board(
+    no number,
+    title varchar2(200),
+    content varchar2(4000),
+    member_id varchar2(15),
+    reg_date date default sysdate,
+    read_count number default 0,
+    constraint pk_board_no primary key(no),
+    constraint fk_board_member_id foreign key(member_id) references member(id) on delete set null
+);
+create sequence seq_board_no;
 
-
-
-
-
-
-
+-- board테이블에 값 추가
+insert into board values(seq_board_no.nextval, 'zzz', 'zzz', 'shua', default, default);
+select * from board;
