@@ -23,6 +23,12 @@ public class BoardDaoImpl implements BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return session.selectList("board.selectBoardList", null, rowBounds);
 	}
+
+	@Override
+	public int selectTotalBoardCount() {
+		return session.selectOne("board.selectTotalBoardCount");
+	}
+	
 	
 	
 }

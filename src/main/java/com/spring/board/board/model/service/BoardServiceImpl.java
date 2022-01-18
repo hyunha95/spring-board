@@ -19,6 +19,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectBoardList(Map<String, Object> map) {
 		return boardDao.selectBoardList(map);
 	}
+
+	@Override
+	public int selectTotalBoardCount() {
+		return boardDao.selectTotalBoardCount();
+	}
+	
 	
 	
 }

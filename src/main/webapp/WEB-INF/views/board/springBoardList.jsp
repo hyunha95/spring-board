@@ -14,8 +14,11 @@ input#btn-add{float:right; margin: 0 0 15px;}
 tr[data-no] {cursor: pointer;}
 </style>
 <section id="board-container" class="container mt-3">
+
 	<input 
-		type="button" value="글쓰기" id="btn-add" class="btn btn-outline-success"/>
+		type="button" value="글쓰기" 
+		id="btn-add" class="btn btn-outline-primary btn-sm"
+		onclick="location.href='${pageContext.request.contextPath}/board/springBoardEnroll.do'"/>
 	<table id="tbl-board" class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -42,5 +45,6 @@ tr[data-no] {cursor: pointer;}
 	</table>
 		
 </section> 
+${pagebar}
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

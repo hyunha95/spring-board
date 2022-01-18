@@ -10,5 +10,7 @@ import com.spring.board.board.model.vo.Board;
 public interface BoardService {
 
 	List<Board> selectBoardList(Map<String, Object> map);
+
+	int selectTotalBoardCount();
 	
 }
