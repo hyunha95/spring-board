@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.board.board.model.service.BoardService;
 import com.spring.board.board.model.vo.Board;
@@ -27,8 +30,14 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping("/springBoardEnroll.do")
-	public void springBoardEnroll() {}
+	@PostMapping("/springBoardEnroll.do")
+	public String springBoardEnroll(@ModelAttribute Board board) {
+		
+		return "redirect:/board/springBoardList.do";
+	}
+	
+	@GetMapping("/springBoardForm.do")
+	public void springBoardForm() {}
 	
 	@GetMapping("/springBoardList.do")
 	public void boardList(

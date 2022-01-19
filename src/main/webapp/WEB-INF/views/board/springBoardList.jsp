@@ -13,12 +13,22 @@
 input#btn-add{float:right; margin: 0 0 15px;}
 tr[data-no] {cursor: pointer;}
 </style>
+<script>
+$(() => {
+	$("tr[data-no]").click((e) => {
+		//console.log(e.target); //td
+		const $tr = $(e.target).parent();
+		const no = $tr.data("no");
+		location.href = `${pageContext.request.contextPath}/board/boardDetail.do?no=\${no}`;
+	});
+});
+</script>
 <section id="board-container" class="container mt-3">
 
 	<input 
 		type="button" value="글쓰기" 
 		id="btn-add" class="btn btn-outline-primary btn-sm"
-		onclick="location.href='${pageContext.request.contextPath}/board/springBoardEnroll.do'"/>
+		onclick="location.href='${pageContext.request.contextPath}/board/springBoardForm.do'"/>
 	<table id="tbl-board" class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -32,11 +42,11 @@ tr[data-no] {cursor: pointer;}
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="board">
-				<tr>
+				<tr data-no="${board.no}">
 					<td>${board.no}</td>
 					<td>${board.title}</td>
 					<td>${board.memberId}</td>
-					<td>${board.regDate}</td>
+					<td><fmt:formatDate value="${board.regDate}" pattern="yy/MM/dd HH:mm"/></td>
 					<td></td>
 					<td>${board.readCount}</td>
 				</tr>

@@ -20,6 +20,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 		log.debug("로그인 성공했습니다.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		log.debug("authentication = {}", authentication);
 		
+		
+		
 		String location = request.getContextPath() + "/";
 		response.sendRedirect(location);
 
