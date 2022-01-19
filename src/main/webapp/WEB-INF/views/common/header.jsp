@@ -14,6 +14,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Landing Page - Start Bootstrap Theme</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -27,7 +28,13 @@
 		alert("${msg}");
 	</script>
 </c:if>
-   
+<style>
+#loginStatus li {
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+}
+</style>
     </head>
     <body>
         <!-- Navigation-->
@@ -43,17 +50,21 @@
                 </sec:authorize>
                 <!-- 로그인 했을 때 -->
                 <sec:authorize access="isAuthenticated()">
-                	<span>
-                		<a href="#">
-                			<sec:authentication property="principal.username"/>
-                		</a>님
-	               		<%-- 로그아웃도 csrf 폼 검사를 하기 때문에 무조건 post로 보내야 한다. --%>
-	               		<form:form
-	               			action="${pageContext.request.contextPath}/member/memberLogout.do"
-	               			method="post">
-	                		<button type="submit" class="btn btn-primary">로그아웃</button>
-	               		</form:form>  
-               		</span>              	
+                	<ul id="loginStatus">
+                		<li>
+	                		<a href="#">
+	                			<sec:authentication property="principal.username"/>
+	                		</a>님                		
+                		</li>
+                		<li>
+		               		<%-- 로그아웃도 csrf 폼 검사를 하기 때문에 무조건 post로 보내야 한다. --%>
+		               		<form:form
+		               			action="${pageContext.request.contextPath}/member/memberLogout.do"
+		               			method="post">
+		                		<button type="submit" class="btn btn-primary">로그아웃</button>
+		               		</form:form>                  		
+                		</li>
+                	</ul>
                 </sec:authorize>
             </div>
         </nav>
