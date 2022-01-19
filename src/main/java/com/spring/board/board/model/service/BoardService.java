@@ -12,5 +12,7 @@ public interface BoardService {
 	List<Board> selectBoardList(Map<String, Object> map);
 
 	int selectTotalBoardCount();
+
+	int insertBoard(Board board);
 	
 }

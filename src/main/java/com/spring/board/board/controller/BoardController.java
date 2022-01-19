@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.board.board.model.service.BoardService;
 import com.spring.board.board.model.vo.Board;
@@ -31,8 +32,14 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@PostMapping("/springBoardEnroll.do")
-	public String springBoardEnroll(@ModelAttribute Board board) {
-		
+	public String springBoardEnroll(
+			@ModelAttribute Board board,
+			RedirectAttributes redirectAttr
+			) {
+		log.debug("board = {}", board);
+		int result = boardService.insertBoard(board);
+		String msg = result > 0 ? "게시글 등록 성공" : "게시글 등록 실패";
+		redirectAttr.addFlashAttribute("msg", msg);
 		return "redirect:/board/springBoardList.do";
 	}
 	

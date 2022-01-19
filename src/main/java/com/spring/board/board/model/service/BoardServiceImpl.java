@@ -24,6 +24,11 @@ public class BoardServiceImpl implements BoardService {
 	public int selectTotalBoardCount() {
 		return boardDao.selectTotalBoardCount();
 	}
+
+	@Override
+	public int insertBoard(Board board) {
+		return boardDao.insertBoard(board);
+	}
 	
 	
 	

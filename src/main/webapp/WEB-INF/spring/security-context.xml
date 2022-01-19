@@ -16,16 +16,16 @@
 
 
 	<http pattern="/resources/**" security="none"/>	
-	<http pattern="/board/springBoardEnroll.do" security="none"/>	
+	<http pattern="/board/springBoardEnroll.do" security="none"/>
 
 	<http auto-config="true">
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/member/memberLogin.do" access="permitAll"/>
 		<intercept-url pattern="/member/enroll.do" access="permitAll"/>
-		<intercept-url pattern="/**" access="permitAll"/>
+		<intercept-url pattern="/board/springBoardList.do" access="permitAll"/>
+		<intercept-url pattern="/**" access="isAuthenticated()"/> 
 		
-		<!-- <intercept-url pattern="/**" access="isAuthenticated()"/> -->
 
 	<form-login
 		login-page="/member/memberLogin.do"
