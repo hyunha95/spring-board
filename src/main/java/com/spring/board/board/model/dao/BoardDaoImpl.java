@@ -38,6 +38,11 @@ public class BoardDaoImpl implements BoardDao {
 	public Board selectOneBoard(int no) {
 		return session.selectOne("board.selectOneBoard", no);
 	}
+
+	@Override
+	public int updateReadCount(int no) {
+		return session.update("board.updateReadCount", no);
+	}
 	
 	
 	

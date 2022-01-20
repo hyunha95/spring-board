@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,16 +36,49 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@GetMapping("/springBoardDetail.do")
-	public void springBoardDetail(@RequestParam int no, Model model) {
+	public String springBoardDetail(
+			@RequestParam int no, 
+			Model model,
+			HttpServletRequest request,
+			HttpServletResponse response) {
 		log.debug("no = {}", no);
 		
 		// 상세보기를 요청하면, 해당글에 대한 boardCookie가 존재하지 않을 때 조회수를 1 증가한다.
 		// a.검사
-		Cookie[] cookies = 
+		Cookie[] cookies = request.getCookies();
+		log.debug("cookies = {}", cookies);
+		boolean hasRead = false;
+		String boardCookieVal = "";
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				String name = cookie.getName();
+				String value = cookie.getValue();
+				log.debug("name, value = {}{}", name, value);
+				if("boardCookie".equals(name)) {
+					boardCookieVal = value;
+					if(value.contains("[" + no + "]")) {
+						hasRead = true;
+						break;
+					}
+				}
+			}
+		}
+		
+		// b.조회수
+		if(!hasRead) {
+			int result = boardService.updateReadCount(no);
+			
+			Cookie cookie = new Cookie("boardCookie", boardCookieVal + "[" + no + "]");
+			cookie.setPath(request.getContextPath() + "/board/springBoardDetail.do");
+			cookie.setMaxAge(24 * 60 * 60); // 1일짜리 영속쿠키
+			response.addCookie(cookie);
+		}
 		
 		Board board = boardService.selectOneBoard(no);
 		log.debug("board = {}", board);
 		model.addAttribute("board", board);
+		
+		return "board/springBoardDetail";
 	}
 	
 	@PostMapping("/springBoardEnroll.do")

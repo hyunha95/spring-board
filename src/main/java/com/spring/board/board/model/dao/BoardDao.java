@@ -15,6 +15,8 @@ public interface BoardDao {
 
 	Board selectOneBoard(int no);
 
+	int updateReadCount(int no);
+
 	
 
 }
