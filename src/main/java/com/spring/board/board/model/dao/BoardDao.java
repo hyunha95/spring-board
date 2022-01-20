@@ -13,6 +13,8 @@ public interface BoardDao {
 
 	int insertBoard(Board board);
 
+	Board selectOneBoard(int no);
+
 	
 
 }

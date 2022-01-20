@@ -16,10 +16,10 @@ tr[data-no] {cursor: pointer;}
 <script>
 $(() => {
 	$("tr[data-no]").click((e) => {
-		//console.log(e.target); //td
+		console.log(e.target); //td
 		const $tr = $(e.target).parent();
 		const no = $tr.data("no");
-		location.href = `${pageContext.request.contextPath}/board/boardDetail.do?no=\${no}`;
+		location.href = `${pageContext.request.contextPath}/board/springBoardDetail.do?no=\${no}`;
 	});
 });
 </script>

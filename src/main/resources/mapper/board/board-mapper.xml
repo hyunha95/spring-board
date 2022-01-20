@@ -27,11 +27,18 @@
 			#{title},
 			#{content},
 			#{memberId},
-			#{regDate},
-			#{readCount}
+			default,
+			default
 		)
-		
 	</insert>
+	<select id="selectOneBoard" resultType="board">
+		select
+			*
+		from
+			board
+		where
+			no = #{no}
+	</select>
 </mapper>
 
 

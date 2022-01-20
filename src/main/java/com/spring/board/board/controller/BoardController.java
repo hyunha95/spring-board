@@ -31,6 +31,19 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@GetMapping("/springBoardDetail.do")
+	public void springBoardDetail(@RequestParam int no, Model model) {
+		log.debug("no = {}", no);
+		
+		// 상세보기를 요청하면, 해당글에 대한 boardCookie가 존재하지 않을 때 조회수를 1 증가한다.
+		// a.검사
+		Cookie[] cookies = 
+		
+		Board board = boardService.selectOneBoard(no);
+		log.debug("board = {}", board);
+		model.addAttribute("board", board);
+	}
+	
 	@PostMapping("/springBoardEnroll.do")
 	public String springBoardEnroll(
 			@ModelAttribute Board board,

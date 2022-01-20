@@ -29,6 +29,12 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoard(Board board) {
 		return boardDao.insertBoard(board);
 	}
+
+	@Override
+	public Board selectOneBoard(int no) {
+		return boardDao.selectOneBoard(no);
+	}
+	
 	
 	
 	

@@ -23,7 +23,7 @@ div#board-container label.custom-file-label{text-align:left;}
 		action="${pageContext.request.contextPath}/board/springBoardEnroll.do" 
 		method="POST">
 		<input type="text" class="form-control" placeholder="제목" name="title" id="title" required>
-		<input type="text" class="form-control" name="id" value="${loginMember.id}" readonly required>
+		<input type="text" class="form-control" name="memberId" value="${loginMember.id}" readonly required>
 		<!-- input:file소스 : https://getbootstrap.com/docs/4.1/components/input-group/#custom-file-input -->
 		<div class="mb-3">
 		  <input class="form-control" type="file" id="formFile">
