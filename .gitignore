@@ -124,4 +124,7 @@ $RECYCLE.BIN/
 .project
 .classpath
 
+# ignore datasource.properties
+datasource.properties
+
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
