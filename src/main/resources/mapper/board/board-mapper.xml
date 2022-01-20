@@ -18,6 +18,36 @@
 		from
 			board
 	</select>
+	
+	<insert id="insertBoard">
+		insert into
+			board
+		values(
+			seq_board_no.nextval,
+			#{title},
+			#{content},
+			#{memberId},
+			default,
+			default
+		)
+	</insert>
+	<select id="selectOneBoard" resultType="board">
+		select
+			*
+		from
+			board
+		where
+			no = #{no}
+	</select>
+	
+	<update id="updateReadCount">
+		update 
+			board
+		set
+			read_count = read_count + 1
+		where
+			no = #{no}
+	</update>
 </mapper>
 
 

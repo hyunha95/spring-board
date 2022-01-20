@@ -11,4 +11,12 @@ public interface BoardDao {
 
 	int selectTotalBoardCount();
 
+	int insertBoard(Board board);
+
+	Board selectOneBoard(int no);
+
+	int updateReadCount(int no);
+
+	
+
 }

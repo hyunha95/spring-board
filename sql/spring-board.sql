@@ -194,7 +194,7 @@ Insert into BOARD (NO,TITLE,MEMBER_ID,CONTENT,REG_DATE,READ_COUNT) values (SEQ_B
 
 
 
-
+select * from board where no = 80;
 
 
 

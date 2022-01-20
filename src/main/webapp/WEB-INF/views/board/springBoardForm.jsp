@@ -8,6 +8,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
+<sec:authentication property="principal" var="loginMember"/>
+
 <style>
 div#board-container{width:800px; margin:0 auto; text-align:center;}
 div#board-container input{margin-bottom:15px;}
@@ -19,10 +21,9 @@ div#board-container label.custom-file-label{text-align:left;}
 	<form 
 		name="springBoardFrm" 
 		action="${pageContext.request.contextPath}/board/springBoardEnroll.do" 
-		method="POST"
-		enctype="multipart/form-data">
+		method="POST">
 		<input type="text" class="form-control" placeholder="제목" name="title" id="title" required>
-		<input type="text" class="form-control" name="id" value="" readonly required>
+		<input type="text" class="form-control" name="memberId" value="${loginMember.id}" readonly required>
 		<!-- input:file소스 : https://getbootstrap.com/docs/4.1/components/input-group/#custom-file-input -->
 		<div class="mb-3">
 		  <input class="form-control" type="file" id="formFile">
