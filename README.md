@@ -1,9 +1,10 @@
 # spring-board
 스프링으로 만든 게시판입니다.
 
-spring-security사용하여 로그인, 로그아웃, 회원가입 구현
+spring-security사용하여 로그인, 로그아웃 구현
+https://github.com/hyunha95/spring-board/blob/f041f14a9b71a5b45995b5d81d24e9a536f98904/src/main/webapp/WEB-INF/spring/security-context.xml#L30
 
-BCryptPasswordEncoder 사용하여 암호화
+회원가입 시 BCryptPasswordEncoder 사용하여 암호화
 https://github.com/hyunha95/spring-board/blob/47879ed45e18c160987b88f7fe363ba8f4fd3d4a/src/main/java/com/spring/board/member/controller/MemberController.java#L39
 
 게시판 CRUD 기능
