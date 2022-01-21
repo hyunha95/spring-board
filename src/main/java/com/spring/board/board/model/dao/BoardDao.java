@@ -3,6 +3,7 @@ package com.spring.board.board.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.spring.board.board.model.vo.Attachment;
 import com.spring.board.board.model.vo.Board;
 
 public interface BoardDao {
@@ -17,6 +18,10 @@ public interface BoardDao {
 
 	int updateReadCount(int no);
 
+	int insertAttachment(Attachment attach);
+
+	List<Attachment> selectAttachmentByBoardNo(int no);
+	
 	
 
 }
