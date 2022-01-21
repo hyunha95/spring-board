@@ -5,11 +5,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.board.board.model.dao.BoardDao;
+import com.spring.board.board.model.vo.Attachment;
 import com.spring.board.board.model.vo.Board;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
@@ -27,12 +30,36 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertBoard(Board board) {
-		return boardDao.insertBoard(board);
+		int result =  boardDao.insertBoard(board);
+		List<Attachment> attachments = board.getAttachments();
+		if(attachments != null) {
+			for(Attachment attach : attachments) {
+				// fk컬럼 boardNo값 설정
+				attach.setBoardNo(board.getNo());
+				result = insertAttachment(attach);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int insertAttachment(Attachment attach) {
+		return boardDao.insertAttachment(attach);
+		
 	}
 
 	@Override
 	public Board selectOneBoard(int no) {
-		return boardDao.selectOneBoard(no);
+		// 1. board테이블 조회
+		Board board = boardDao.selectOneBoard(no);
+		
+		// 2. attachment테이블 조회
+		List<Attachment> attachments = boardDao.selectAttachmentByBoardNo(no);
+		
+		// 3. 합치기
+		board.setAttachments(attachments);
+		
+		return board;
 	}
 
 	@Override

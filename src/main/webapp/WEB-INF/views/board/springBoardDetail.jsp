@@ -21,6 +21,14 @@ div#board-container label.custom-file-label{text-align:left;}
 	<input type="text" class="form-control" 
 		   name="memberId" 
 		   value="${board.memberId}" readonly required>
+		   
+	<c:forEach items="${board.attachments}" var="attach" varStatus="vs">
+		<a href="${pageContext.request.contextPath}/board/fileDownload.do?no=${attach.no}"
+			role="button"
+			class="btn btn-outline-success btn-block">
+			첨부파일${vs.count} - ${attach.originalFilename}
+		</a>
+	</c:forEach>
 	
     <textarea class="form-control mt-3" name="content" 
     		  placeholder="내용" required>${board.content}</textarea>

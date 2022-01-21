@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 
+import com.spring.board.board.model.vo.Attachment;
 import com.spring.board.board.model.vo.Board;
 
 public interface BoardService {
@@ -14,6 +15,8 @@ public interface BoardService {
 	int selectTotalBoardCount();
 
 	int insertBoard(Board board);
+	
+	int insertAttachment(Attachment attach);
 
 	Board selectOneBoard(int no);
 

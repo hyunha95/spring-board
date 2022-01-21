@@ -21,15 +21,16 @@ div#board-container label.custom-file-label{text-align:left;}
 	<form 
 		name="springBoardFrm" 
 		action="${pageContext.request.contextPath}/board/springBoardEnroll.do" 
-		method="POST">
+		method="POST"
+		enctype="multipart/form-data">
 		<input type="text" class="form-control" placeholder="제목" name="title" id="title" required>
 		<input type="text" class="form-control" name="memberId" value="${loginMember.id}" readonly required>
 		<!-- input:file소스 : https://getbootstrap.com/docs/4.1/components/input-group/#custom-file-input -->
 		<div class="mb-3">
-		  <input class="form-control" type="file" id="formFile">
+		  <input class="form-control" name="upFile" type="file" id="formFile">
 		</div>
 		<div class="mb-3">
-		  <input class="form-control" type="file" id="formFile">
+		  <input class="form-control" name="upFile" type="file" id="formFile">
 		</div>
 		
 	    <textarea class="form-control" rows="10" name="content" placeholder="내용" required></textarea>
