@@ -15,3 +15,9 @@ https://github.com/hyunha95/spring-board/blob/47879ed45e18c160987b88f7fe363ba8f4
 MultipartFile 인터페이스 사용하여 첨부파일을 서버컴퓨터에 저장
 https://github.com/hyunha95/spring-board/blob/86b0f8c838b7097fd327f0f7c77ba5adefd2b9ce/src/main/java/com/spring/board/board/controller/BoardController.java#L91
 
+첨부파일 다운로드 구현 -> ResourceLoader 인터페이스의 getResource 메소드에 file: 접두어와 함께 첨부파일이 저장된 절대경로 전달하여 Resource객체 생성 후 view단으로 리턴 
+https://github.com/hyunha95/spring-board/blob/b257e28276f0003030f45ecbab74daf19e8c24dc/src/main/java/com/spring/board/board/controller/BoardController.java#L166
+
+
+
+
