@@ -30,8 +30,9 @@ div#board-container label.custom-file-label{text-align:left;}
 		</a>
 	</c:forEach>
 	
+	<%-- xss공격대비 --%>
     <textarea class="form-control mt-3" name="content" 
-    		  placeholder="내용" required>${board.content}</textarea>
+    		  placeholder="내용" required><c:out value="${board.content}" escapeXml="true"/></textarea>
     <input type="number" class="form-control" name="readCount"
 		   value="${board.readCount}" readonly>
 	<input type="datetime-local" class="form-control" name="regDate" 
