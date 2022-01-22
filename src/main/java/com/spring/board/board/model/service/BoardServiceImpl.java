@@ -66,6 +66,11 @@ public class BoardServiceImpl implements BoardService {
 	public int updateReadCount(int no) {
 		return boardDao.updateReadCount(no);
 	}
+
+	@Override
+	public Attachment selectOneAttachment(int no) {
+		return boardDao.selectOneAttachment(no);
+	}
 	
 	
 	

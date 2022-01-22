@@ -75,6 +75,15 @@
 		where
 			no = #{no}
 	</update>
+	
+	<select id="selectOneAttachment" resultType="attachment">
+		select
+			*
+		from
+			attachment
+		where
+			no = #{no}
+	</select>
 </mapper>
 
 
