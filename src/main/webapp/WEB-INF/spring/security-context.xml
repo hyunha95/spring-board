@@ -51,18 +51,6 @@
 	<authentication-manager>
 		<authentication-provider user-service-ref="securityService">
 			<password-encoder ref="bcryptPasswordEncoder"/>
-				<!-- 
-			<user-service>
-				<user 
-				name="hyunha" 
-				password="1234"
-				authorities="ROLE_USER"/>
-				<user 
-				name="admin"
-				password="1234" 
-				authorities="ROLE_ADMIN"/>
-			</user-service>
- -->
 		</authentication-provider>
 	</authentication-manager>
 	

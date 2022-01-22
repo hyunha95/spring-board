@@ -54,6 +54,11 @@ public class BoardDaoImpl implements BoardDao {
 	public int updateReadCount(int no) {
 		return session.update("board.updateReadCount", no);
 	}
+
+	@Override
+	public Attachment selectOneAttachment(int no) {
+		return session.selectOne("board.selectOneAttachment", no);
+	}
 	
 	
 	

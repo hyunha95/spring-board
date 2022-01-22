@@ -191,9 +191,17 @@ Insert into BOARD (NO,TITLE,MEMBER_ID,CONTENT,REG_DATE,READ_COUNT) values (SEQ_B
 Insert into BOARD (NO,TITLE,MEMBER_ID,CONTENT,REG_DATE,READ_COUNT) values (SEQ_BOARD_NO.nextval,'안녕하세요, 게시판입니다 - 60','shua','안녕하세',to_date('18/06/10','RR/MM/DD'),0);
 
 
+select * from board order by no desc;
+select * from attachment;
 
-
-
+select
+    b.*,
+    a.*
+from
+    board b join attachment a
+        on b.no = a.board_no
+where
+    b.no = 141;
 
 
 

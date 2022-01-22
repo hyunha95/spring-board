@@ -21,5 +21,7 @@ public interface BoardService {
 	Board selectOneBoard(int no);
 
 	int updateReadCount(int no);
+
+	Attachment selectOneAttachment(int no);
 	
 }
