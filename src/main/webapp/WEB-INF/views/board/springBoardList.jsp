@@ -47,7 +47,9 @@ $(() => {
 					<td>${board.title}</td>
 					<td>${board.memberId}</td>
 					<td><fmt:formatDate value="${board.regDate}" pattern="yy/MM/dd HH:mm"/></td>
-					<td></td>
+					<td>
+						<c:if test="${board.attachCount gt 0}"><img src="${pageContext.request.contextPath}/resources/assets/img/file.png" alt="첨부파일" width="25px"/></c:if>
+					</td>
 					<td>${board.readCount}</td>
 				</tr>
 			</c:forEach>
