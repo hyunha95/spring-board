@@ -202,6 +202,15 @@ from
         on b.no = a.board_no
 where
     b.no = 141;
+    
+    
+select 
+    b.* ,
+    (select count(*) from attachment where board_no = b.no) attach_count
+from 
+    board b
+order by 
+    no desc;
 
 
 
