@@ -17,6 +17,7 @@
 
 	<http pattern="/resources/**" security="none"/>	
 	<http pattern="/board/springBoardEnroll.do" security="none"/>
+	<http pattern="/board/springUpdateBoard.do" security="none"/>
 
 	<http auto-config="true">
 		<intercept-url pattern="/" access="permitAll"/>

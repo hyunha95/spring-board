@@ -3,6 +3,8 @@ package com.spring.board.board.model.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,7 @@ public class BoardEntity implements Serializable{
 	private String title;
 	private String content;
 	private String memberId;
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regDate;
 	private int readCount;
 }

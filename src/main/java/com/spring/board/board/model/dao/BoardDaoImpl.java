@@ -59,6 +59,16 @@ public class BoardDaoImpl implements BoardDao {
 	public Attachment selectOneAttachment(int no) {
 		return session.selectOne("board.selectOneAttachment", no);
 	}
+
+	@Override
+	public int deleteAttachment(int delFileNo) {
+		return session.delete("board.deleteAttachment", delFileNo);
+	}
+
+	@Override
+	public int updateBoard(Board board) {
+		return session.update("board.updateBoard", board);
+	}
 	
 	
 	

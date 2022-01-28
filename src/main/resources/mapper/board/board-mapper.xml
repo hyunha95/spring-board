@@ -85,6 +85,23 @@
 		where
 			no = #{no}
 	</select>
+	
+	<delete id="deleteAttachment">
+		delete from
+			attachment
+		where
+			no = #{delfileNo}
+	</delete>
+	
+	<update id="updateBoard">
+		update 
+			board
+		set
+			title = #{title},
+			content = #{content}
+		where
+			no = #{no}	
+	</update>
 </mapper>
 
 

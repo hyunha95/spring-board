@@ -212,10 +212,10 @@ from
 order by 
     no desc;
 
+select * from board order by no desc;
+select * from attachment;
 
 
-
-
-
+update board set title = '롤백' where no = 181;
 
 
