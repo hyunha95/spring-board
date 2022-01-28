@@ -1,9 +1,12 @@
 package com.spring.board.board.controller;
 
+import java.beans.PropertyEditor;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +25,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -181,6 +187,83 @@ public class BoardController {
 		return resource;
 	}
 	
+	@GetMapping("/springUpdateBoard.do")
+	public void springUpdateBoard(@RequestParam int no, Model model) {
+		Board board = boardService.selectOneBoard(no);
+		model.addAttribute(board);
+	}
+	
+	@PostMapping(value="/springUpdateBoard.do",
+				produces=MediaType.MULTIPART_FORM_DATA_VALUE)
+	public String springUpdateBoard(
+			@ModelAttribute Board board, 
+			@RequestParam(value = "delFile", required = false) String[] delFiles,
+			@RequestParam(value = "upFile", required = false) MultipartFile[] upFiles,
+			RedirectAttributes ra) throws IllegalStateException, IOException {
+		log.debug("board = {}", board);
+		log.debug("delFiles = {}", delFiles);
+		log.debug("upFiles = {}", upFiles);
+		
+		// board테이블 관련 수정, 기존 첨부파일 제거, 새로운 첨부파일 추가가 모두 한 트랜잭션으로 묶여야함
+		// 서버 컴퓨터에 사용자 업로드파일 저장
+		String saveDirectory = application.getRealPath("/resources/upload/board");
+		String msg = "";
+		
+		if(upFiles != null) {
+			List<Attachment> attachments = new ArrayList<>();
+			for(MultipartFile upFile : upFiles) {
+				String originalFilename = upFile.getOriginalFilename();
+				String renamedFilename = HelloSpringUtils.rename(originalFilename);
+				File dest = new File(saveDirectory, renamedFilename);
+				upFile.transferTo(dest);
+				
+				Attachment attach = new Attachment();
+				attach.setOriginalFilename(originalFilename);
+				attach.setRenamedFilename(renamedFilename);
+				attachments.add(attach);
+			}
+			
+			if(!attachments.isEmpty())
+				board.setAttachments(attachments);
+		}
+		
+		// 기존 첨부파일 삭제
+		if(delFiles != null) {
+			for(String temp : delFiles) {
+				int delFileNo = Integer.parseInt(temp);
+				Attachment attach = boardService.selectOneAttachment(delFileNo);
+				
+				// 1. 첨부파일 삭제 : {saveDirectory}/{renamedFilename}
+				String renamedFilename = attach.getRenamedFilename();
+				File delFile = new File(saveDirectory, renamedFilename);
+				boolean removed = delFile.delete();
+				
+				// 2. DB 첨부파일 레코드 삭제
+				int result = boardService.deleteAttachment(delFileNo);
+				
+				if(removed && result > 0 )
+					msg += "기존첨부파일" + attach.getOriginalFilename() + " 삭제 완료\\n";
+				else
+					msg += "기존첨부파일 삭제 실패\\n";
+			}
+		}
+		
+		// 게시물 제목, 내용 수정
+		int result = boardService.updateBoard(board);
+		msg += "게시물 수정 완료!!!!";
+		ra.addFlashAttribute("msg", msg);
+		
+		return "redirect:/board/springBoardDetail.do?no=" + board.getNo();
+	}
+	
+	// InitBinder사용하거나 @DateTimeFormat사용
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// boolean allowEmpty - true 빈문자열 ""인 경우 null변환함
+		PropertyEditor editor = new CustomDateEditor(sdf, true);
+		binder.registerCustomEditor(Date.class, editor);
+	}
 	
 }
 

@@ -24,7 +24,7 @@ div#board-container label.custom-file-label{text-align:left;}
 		<input 
 			type="button" value="수정" 
 			id="btn-add" class="btn btn-outline-primary btn-sm"
-			onclick="location.href='${pageContext.request.contextPath}/board/springUpdateBoard.do'"/>
+			onclick="location.href='${pageContext.request.contextPath}/board/springUpdateBoard.do?no=${board.no}'"/>
 		<input 
 			type="button" value="삭제" 
 			id="btn-add" class="btn btn-outline-primary btn-sm"

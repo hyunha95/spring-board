@@ -1,5 +1,6 @@
 package com.spring.board.board.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,24 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Attachment selectOneAttachment(int no) {
 		return boardDao.selectOneAttachment(no);
+	}
+
+	@Override
+	public int updateBoard(Board board) {
+		int result = boardDao.updateBoard(board);
+		List<Attachment> attachments = board.getAttachments();
+		if(attachments != null) {
+			for(Attachment attach : attachments) {
+				attach.setBoardNo(board.getNo());
+				result = insertAttachment(attach);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteAttachment(int delFileNo) {
+		return boardDao.deleteAttachment(delFileNo);
 	}
 	
 	
