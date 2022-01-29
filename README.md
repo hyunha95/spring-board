@@ -19,8 +19,11 @@ https://github.com/hyunha95/spring-board/blob/86b0f8c838b7097fd327f0f7c77ba5adef
 
 첨부파일 다운로드 구현 -> ResourceLoader 인터페이스의 getResource 메소드에 file: 접두어와 함께 첨부파일이 저장된 절대경로 전달하여 Resource객체 생성 후 view단으로 리턴 
 https://github.com/hyunha95/spring-board/blob/b257e28276f0003030f45ecbab74daf19e8c24dc/src/main/java/com/spring/board/board/controller/BoardController.java#L166   
-
-게시판 수정 -> 게시물 제목, 내용 수정, 기존 첨부파일 삭제, 새로운 첨부파일 추가 기능 구현   
+   
+   
+게시물 수정, 삭제
+게시물을 작성자와 관리자에게만 수정, 삭제 버튼을 노출
+게시물 수정 -> 게시물 제목, 내용 수정, 기존 첨부파일 삭제, 새로운 첨부파일 추가 기능 구현   
 https://github.com/hyunha95/spring-board/blob/699cfeaa8bbf25eaad70869623f10261bb4256d6/src/main/java/com/spring/board/board/controller/BoardController.java#L196
 
 
