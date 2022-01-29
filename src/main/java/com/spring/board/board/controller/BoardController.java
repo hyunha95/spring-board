@@ -281,7 +281,7 @@ public class BoardController {
 			}			
 		}
 		
-		// 2. board테이블에 행 삭제
+		// 2. board테이블의 행 삭제
 		// board.no를 참조하고 있는 attachment테이블의 행은 on delete cascade로 자동 삭제
 		int result = boardService.deleteBoard(no);
 		msg += result > 0 ? "게시물 삭제 성공" : "게시물 삭제 실패";
