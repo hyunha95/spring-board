@@ -19,8 +19,11 @@ div#board-container label.custom-file-label{text-align:left;}
 </style>
 <div id="board-container" class="mx-auto text-center mt-2">
 
-	<!-- 현재 로그인한 유저의 id와 게시글을 작성한 유저의 id가 같은 경우 -->
-	<c:if test="${board.memberId.equals(loginMember.id)}">
+	<!-- 
+	현재 로그인한 유저의 id와 게시글을 작성한 유저의 id가 같은 경우  &&
+		관리자만 수정, 삭제 버튼이 보인다.
+	-->
+	<c:if test="${board.memberId.equals(loginMember.id) || loginMember.authorities.contains(ROLE_ADMIN)}">
 		<input 
 			type="button" value="수정" 
 			id="btn-add" class="btn btn-outline-primary btn-sm"
@@ -28,7 +31,7 @@ div#board-container label.custom-file-label{text-align:left;}
 		<input 
 			type="button" value="삭제" 
 			id="btn-add" class="btn btn-outline-primary btn-sm"
-			onclick="location.href='#'"/>	
+			onclick="boardDelete()"/>	
 	</c:if>
 	<input type="text" class="form-control" 
 		   placeholder="제목" name="boardTitle" id="title" 
@@ -53,5 +56,12 @@ div#board-container label.custom-file-label{text-align:left;}
 	<input type="datetime-local" class="form-control" name="regDate" 
 		   value='<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd'T'hh:mm"/>' readonly>
 </div>
-
+<script>
+function boardDelete() {
+	const bool = confirm("정말로 삭제 하시겠습니까?") 
+	if(bool)
+		location.href='${pageContext.request.contextPath}/board/springBoardDelete.do?no=${board.no}';
+	
+}
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

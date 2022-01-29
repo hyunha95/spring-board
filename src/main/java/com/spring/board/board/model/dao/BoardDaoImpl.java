@@ -69,6 +69,16 @@ public class BoardDaoImpl implements BoardDao {
 	public int updateBoard(Board board) {
 		return session.update("board.updateBoard", board);
 	}
+
+	@Override
+	public int deleteBoard(int no) {
+		return session.delete("board.deleteBoard", no);
+	}
+
+	@Override
+	public List<Attachment> selectAttachmentsByNo(int no) {
+		return session.selectList("board.selectAttachmentsByNo", no);
+	}
 	
 	
 	

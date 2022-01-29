@@ -27,6 +27,10 @@ public interface BoardDao {
 	int deleteAttachment(int delFileNo);
 
 	int updateBoard(Board board);
+
+	int deleteBoard(int no);
+
+	List<Attachment> selectAttachmentsByNo(int no);
 	
 	
 
