@@ -6,6 +6,17 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%-- spring-webmvc의존 : security의 csrf토큰 생성 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%
+	Cookie[] cookies = request.getCookies();
+	String saveId = null;
+	if(cookies != null) {
+		for(Cookie cookie : cookies) {
+			if("saveId".equals(cookie.getName())) {
+				saveId = cookie.getValue();
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +54,7 @@ $(() => {
 	        <!-- 아이디 -->
 	        <div class="mb-3">
 			    <label for="id" class="form-label">아이디</label>
-			    <input type="text" name="id" class="form-control" id="id">
+			    <input type="text" name="id" class="form-control" id="id" value="<%= saveId != null ? saveId : "" %>">
 			    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
 		    </div>
 		    <!-- 비밀번호 -->
@@ -54,7 +65,7 @@ $(() => {
 			</div>
 			<!-- 아이디 저장 -->
 			<div class="mb-3 form-check">
-			    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+			    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="saveId" <%= saveId != null ? "checked" : "" %>>
 			    <label class="form-check-label" for="exampleCheck1">아이디 저장</label>
 			</div>
 			<!-- submit 버튼 -->
