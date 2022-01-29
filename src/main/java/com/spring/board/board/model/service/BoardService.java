@@ -27,5 +27,9 @@ public interface BoardService {
 	int updateBoard(Board board);
 
 	int deleteAttachment(int delFileNo);
+
+	int deleteBoard(int no);
+
+	List<Attachment> selectAttachmentsByNo(int no);
 	
 }

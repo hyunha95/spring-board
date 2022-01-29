@@ -193,8 +193,7 @@ public class BoardController {
 		model.addAttribute(board);
 	}
 	
-	@PostMapping(value="/springUpdateBoard.do",
-				produces=MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value="/springUpdateBoard.do")
 	public String springUpdateBoard(
 			@ModelAttribute Board board, 
 			@RequestParam(value = "delFile", required = false) String[] delFiles,
@@ -263,6 +262,33 @@ public class BoardController {
 		// boolean allowEmpty - true 빈문자열 ""인 경우 null변환함
 		PropertyEditor editor = new CustomDateEditor(sdf, true);
 		binder.registerCustomEditor(Date.class, editor);
+	}
+	
+	@GetMapping("springBoardDelete.do")
+	public String springBoardDelete(@RequestParam int no, RedirectAttributes ra) {
+		// 1. 업로드 파일 삭제: java.io.File api 파일제거
+		String saveDirectory = application.getRealPath("/resources/upload/board");
+		String msg = "";
+		// board테이블의 no를 참조하고 있는 attachment테이블의 행
+		List<Attachment> attachments = boardService.selectAttachmentsByNo(no);
+		if(!attachments.isEmpty()) {
+			for(Attachment attach : attachments) {
+				String renamedFilename = attach.getRenamedFilename();
+				File delFile = new File(saveDirectory, renamedFilename);
+				boolean removed = delFile.delete();
+				if(removed)
+					msg += attach.getOriginalFilename() + "게시물 삭제\\n";
+			}			
+		}
+		
+		// 2. board테이블에 행 삭제
+		// board.no를 참조하고 있는 attachment테이블의 행은 on delete cascade로 자동 삭제
+		int result = boardService.deleteBoard(no);
+		msg += result > 0 ? "게시물 삭제 성공" : "게시물 삭제 실패";
+		
+		ra.addFlashAttribute("msg", msg);
+		
+		return "redirect:/board/springBoardList.do";
 	}
 	
 }

@@ -102,6 +102,22 @@
 		where
 			no = #{no}	
 	</update>
+	
+	<delete id="deleteBoard">
+		delete from
+			board
+		where
+			no = #{no}
+	</delete>
+	
+	<select id="selectAttachmentsByNo" resultType="attachment">
+		select
+			*
+		from
+			attachment
+		where
+			board_no = #{no}
+	</select>
 </mapper>
 
 
