@@ -24,7 +24,10 @@ https://github.com/hyunha95/spring-board/blob/b257e28276f0003030f45ecbab74daf19e
 게시물 수정, 삭제   
 게시물을 작성자와 관리자에게만 수정, 삭제 버튼을 노출   
 게시물 수정 -> 게시물 제목, 내용 수정, 기존 첨부파일 삭제, 새로운 첨부파일 추가 기능 구현   
-https://github.com/hyunha95/spring-board/blob/699cfeaa8bbf25eaad70869623f10261bb4256d6/src/main/java/com/spring/board/board/controller/BoardController.java#L196
+https://github.com/hyunha95/spring-board/blob/699cfeaa8bbf25eaad70869623f10261bb4256d6/src/main/java/com/spring/board/board/controller/BoardController.java#L196   
+게시물 삭제 -> 기존 업로드 파일 삭제, board테이블의 행 삭제. board.no를 참조하고 있는 attachment 테이블의 행은 on delete cascade로 자동 삭제   
+https://github.com/hyunha95/spring-board/blob/1bb21349a7b02683e6678a77c9131a70b7037b99/src/main/java/com/spring/board/board/controller/BoardController.java#L267
+
 
 
 
