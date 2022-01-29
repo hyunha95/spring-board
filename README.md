@@ -7,6 +7,7 @@ https://github.com/hyunha95/spring-board/blob/f041f14a9b71a5b45995b5d81d24e9a536
 back: https://github.com/hyunha95/spring-board/blob/4da0e29bfb7e8e3308e20aaedd1803153a300119/src/main/java/com/spring/board/member/controller/CustomSuccessHandler.java#L17
 front: https://github.com/hyunha95/spring-board/blob/4da0e29bfb7e8e3308e20aaedd1803153a300119/src/main/webapp/WEB-INF/views/member/memberLogin.jsp#L10   
    
+   
 회원가입 시 BCryptPasswordEncoder 사용하여 암호화
 https://github.com/hyunha95/spring-board/blob/47879ed45e18c160987b88f7fe363ba8f4fd3d4a/src/main/java/com/spring/board/member/controller/MemberController.java#L39
 
